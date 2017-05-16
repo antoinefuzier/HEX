@@ -1,6 +1,6 @@
 import java.io.File;
 
-public class InterfaceAvecC {
+public class Plateau {
 	
 	static{
 		
@@ -9,7 +9,10 @@ public class InterfaceAvecC {
 	}
 	
 	public static native String creerGraphe(int n);
-
+	public static native String rentrerCoup(String s,char c,int x,int y);
+	public static native char verifierGagnant(String s);
+	public static native String annulerDernierCoup(String s, int x, int y);
+	public static native char verifierCase(String s,int x,int y);
 	
 	
 	
