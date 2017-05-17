@@ -139,22 +139,19 @@ import java.io.PrintWriter;
 			try {
 				
 			    BufferedReader fr = new BufferedReader(new FileReader ("sauvegarde.txt"));
-		        while (fr.ready())
+		        while (fr.ready()){
 		        	valeur += fr.readLine();
+		        	valeur+="\n";
+		        }
 		        fr.close();
-		        
-		        try
-				{
+
 				    PrintWriter fw = new PrintWriter(new BufferedWriter(new FileWriter (f)));
 				    
-				    for(int i=0;i<valeur.length();i++){
+				    for(int i=0;i<valeur.length();i++)
 			    		fw.print (valeur.charAt(i));
 			    	fw.close();	
-			    }
-				}
-				catch (IOException exception){
-				    System.out.println ("Erreur lors de la lecture : " + exception.getMessage());
-				}
+			    
+				
 		        	
 		        }
 		catch (IOException exception){
@@ -181,8 +178,9 @@ import java.io.PrintWriter;
 		        try
 				{
 		        	PrintWriter fw = new PrintWriter(new BufferedWriter(new FileWriter (f)));
-		        	String nouveau=valeur.substring(14+((taille+1)*taille),valeur.length());
-		        	String n="\\hex\n\\board\n";
+		        	String nouveau=valeur.substring((13+((taille+1)*taille))+1,valeur.length());
+		        	System.out.println(nouveau);
+		        	String n="\\hex\n\\board "+ taille+ "\n";
 		        	String ajout;
 		        	for(int i=0;i<s.length();i++){ 
 			    		n+=s.charAt(i);
@@ -193,7 +191,7 @@ import java.io.PrintWriter;
 		        	
 		        	n+=nouveau; /* contient le nouveau graphe avc les coups deja joué */
 		        	nouveau=n.substring(0,n.length()-17);
-		        	
+		        
 		        	if(pion=='b')
 						ajout="\\play BLANC"+ " " + x + " "+ y +"\n" ;
 					else
@@ -285,7 +283,7 @@ import java.io.PrintWriter;
 		
 		public int recupererTaille(){
 			try {
-		        BufferedReader fr = new BufferedReader(new FileReader ("sauvegardeTemp.txt"));
+		        BufferedReader fr = new BufferedReader(new FileReader ("sauvegarde.txt"));
 		        fr.readLine();
 		        int valeur;
 		        String s1=fr.readLine();  
@@ -458,9 +456,9 @@ import java.io.PrintWriter;
 		
 		public String charger() {
 		    try {
-		        BufferedReader fr = new BufferedReader(new FileReader ("sauvegarde.txt"));
+		        BufferedReader fr = new BufferedReader(new FileReader ("sauvegardeTemp.txt"));
 		        fr.readLine();
-		        String s1=fr.readLine();  
+		        String s1=fr.readLine();  /*prend la ligne "\board taille */
 		        char taille=s1.charAt(s1.length()-1);
 		        String valeur = new String();
 		        int i=0;
@@ -479,27 +477,28 @@ import java.io.PrintWriter;
 		
 		    }
 		
+		
+		
 		public char chargerDernierPion(){
 			try {
 				/* tableau de lignes qui contient le fichier ligne par ligne */
 				String tab[]=new String[500]; 
 				int i=0;
-		        BufferedReader fr = new BufferedReader(new FileReader ("sauvegarde.txt"));
+		        BufferedReader fr = new BufferedReader(new FileReader ("sauvegardeTemp.txt"));
 		        while (fr.ready() ) {
 		        	
 		            	tab[i] = fr.readLine();
 		            	i++;
 		            	
 		            }
+		        
 		        fr.close();
-		        if(tab[i-3].charAt(2)!='p'){
-		        	return '.';
-		        }
-		        else if(tab[i-3].charAt(6)=='B') /* tab[i-3] contient le dernier "\play PION x y " jouer */
+		        
+		        if(tab[i-3].charAt(6)=='B') /* tab[i-3] contient le dernier "\play PION x y " jouer */
 		        	return 'b';
 		        else if(tab[i-3].charAt(6)=='N')
 		        	return 'n';
-		        else
+		        else 
 		        	return '.';
 		        
 		        
@@ -513,13 +512,60 @@ import java.io.PrintWriter;
 		
 		    }
 		
-		public int nbCoupNoirjoue(){
-			
-			
-			
-			return 1;
-		}
+		/*
+		 * Description: met à jour le nombre de coup des
+		 * joueurs blanc, noir et le nombre de tour
+		 */
+		public void nbCoup(Jouer j){
+			int i;
+			int p=1;
+			int nbTour=1;
+			int nbNoir=1;
+			int nbBlanc=1;
+			try {
+				/* tableau de lignes qui contient le fichier ligne par ligne */
+				String tab[]=new String[500]; 
+				i=0;
+		        BufferedReader fr = new BufferedReader(new FileReader ("sauvegardeTemp.txt"));
+		        while (fr.ready() ) {
+		        	
+		            	tab[i] = fr.readLine();
+		            	i++;
+		            	
+		            }
+		        
+		        fr.close();
+		        
+		        int taille=recupererTaille();
+		        ;
+		        i=taille+4;
+		        while(tab[i].charAt(1)!='e'){ /* s'arrete au 'e' de endgame */
+		        	
+		        	if(p%2==0){
+		        		nbTour++;/* icremente tous les deux tours de boucle */
+		        		p++;
+		        	}
+		        	if(tab[i].charAt(6)=='B')
+		        		nbBlanc++;
+		        	else
+		        		nbNoir++;
+		        	i++;
+		        	
+		        }
+		        j.setNbCoupBlanc(nbBlanc);
+		        j.setNbCoupNoir(nbNoir);
+		        j.setNbTour(nbTour);
+		        
+		        
+		    }
+		catch (IOException exception){
+		    System.out.println ("Erreur lors de la lecture : " + exception.getMessage());
+		    
+		        }
 		
+		    }
 }
+		
+
 
 
