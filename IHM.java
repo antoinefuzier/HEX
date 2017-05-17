@@ -50,11 +50,7 @@ public class IHM {
 					choix=-1;
 				
 				}
-				else if(m.chargerDernierPion()=='.'){
-					System.out.println("Impossible de sauvegarder, vous n'avez pas joué de coup.");
-					System.out.println("retour au menu...");
-					choix=j.jouerPartie(graphe,pion);
-				}
+				
 				else{
 					m.sauvegarder();
 					System.out.println("La partie en cours a été sauvegarder");
