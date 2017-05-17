@@ -102,10 +102,14 @@ public class IHM {
 				else{
 					graphe=Plateau.annulerDernierCoup(graphe,x,y);
 					pion=m.chargerDernierPion();
-					if(pion=='b')
+					if(pion=='b'){
+						m.nbCoup(j);
 						choix=j.jouerPartie(graphe,'n');
-					else
+					}
+					else{
+						m.nbCoup(j);
 						choix=j.jouerPartie(graphe,'b');
+					}
 				}
 			}
 			
