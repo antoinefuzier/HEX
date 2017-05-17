@@ -63,7 +63,7 @@ public class IHM {
 			else if(choix==3){
 				graphe=m.charger();
 				pion=m.chargerDernierPion();
-				if(graphe=="null" || pion=='.'){
+				if(graphe=="null"){
 					System.out.println("Impossible de charger, pas de partie en cours sauvegarder");
 					System.out.println("retour au menu...");
 					choix=-1;
@@ -77,10 +77,14 @@ public class IHM {
 						pion=g.gererErreurChar('b','n');
 						choix=j.jouerPartie(graphe,pion);
 					}
-					else if(pion=='b')
+					else if(pion=='b'){
+						m.nbCoup(j);
 						choix=j.jouerPartie(graphe,'n');
-					else
+					}
+					else{
+						m.nbCoup(j);
 						choix=j.jouerPartie(graphe,'b');
+					}
 				}
 				
 			}
