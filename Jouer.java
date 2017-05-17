@@ -10,7 +10,7 @@ public class Jouer {
 	private int nbCoupNoir;
 	private int nbTour;
 	
-	/*Constructeur*/
+	/**Constructeur*/
 	public Jouer(int nbCoupBlanc, int nbCoupNoir, int nbTour) {
 		super();
 		this.nbCoupBlanc = nbCoupBlanc;
@@ -18,6 +18,20 @@ public class Jouer {
 		this.nbTour = nbTour;
 	}
 
+	/**setteurs*/
+	public void setNbCoupBlanc(int nbCoupBlanc) {
+		this.nbCoupBlanc = nbCoupBlanc;
+	}
+
+
+	public void setNbCoupNoir(int nbCoupNoir) {
+		this.nbCoupNoir = nbCoupNoir;
+	}
+
+
+	public void setNbTour(int nbTour) {
+		this.nbTour = nbTour;
+	}
 
 	/*
 	 * Description: vérifie si le coup qu'on joue apaprtient 
@@ -121,6 +135,9 @@ public class Jouer {
 	 * pré-condition: s!=null
 	 */
 	
+	
+
+
 	private char gagnant(String s){
 		
 		return Plateau.verifierGagnant(s);
