@@ -1,9 +1,21 @@
+/******************************************************************
+* Menu                                                   		  *
+* Description: Module pour jouer au jeu HEX entre deux joueurs    *
+* F. ANTOINE - Univ. de Toulouse III - Paul Sabatier              *
+*******************************************************************/
+
 
 public class IHM {
 
 	
 	
-	
+	/**
+	 * 
+	 * Description: Permet de jouer au jeu complet,
+	 * gère nouvelle partie, sauvegarde, chargement,
+	 * annuler dernier coup, choix taille plateau etc...
+	 * 
+	 */
 	
 	private static void jouerHex(){
 		
@@ -44,12 +56,21 @@ public class IHM {
 			/* Sauvegarder partie */
 			else if(choix==2){
 				
+				/*Empêche de sauvegarder si aucune partie n'est lancée */
 				if(taille==0){
 					System.out.println("Impossible de sauvegarder, pas de partie en cours");
 					System.out.println("retour à la partie...");
 					choix=-1;
 				
 				}
+				/*Empêche de sauvegarder si la dernière partie est terminé */
+				else if(j.gagnant(m.chargerPlateauTemp())!='.'){ 
+					System.out.println("Impossible de sauvegarder, la partie est fini");
+					System.out.println("retour au menu");
+					choix=-1;
+					
+				}
+				
 				
 				else{
 					m.sauvegarder();
@@ -63,7 +84,7 @@ public class IHM {
 			else if(choix==3){
 				graphe=m.charger();
 				pion=m.chargerDernierPion();
-				if(graphe=="null"){
+				if(graphe=="null"){ /*Aucune partie chargée */
 					System.out.println("Impossible de charger, pas de partie en cours sauvegarder");
 					System.out.println("retour au menu...");
 					choix=-1;
@@ -72,12 +93,13 @@ public class IHM {
 					m.sauvegarderTemporaire(graphe,'a',0,0);
 					taille=m.recupererTaille();
 					pion=m.chargerDernierPion();
-					if(pion=='.'){
+					if(pion=='.'){	/*Chargement d'une partie non commencé */
+						m.initialisernbCoup(j);
 						System.out.print("Qui commence? Les blancs ou les noirs? (b/n) :");
 						pion=g.gererErreurChar('b','n');
 						choix=j.jouerPartie(graphe,pion);
 					}
-					else if(pion=='b'){
+					else if(pion=='b'){ /*Chargement d'une partie sauvegarder d'en sauvegarde.txt */
 						m.nbCoup(j);
 						choix=j.jouerPartie(graphe,'n');
 					}
