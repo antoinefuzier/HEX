@@ -121,6 +121,12 @@ public class IHM {
 					System.out.println("retour au menu...");
 					choix=-1;
 				}
+				else if(j.gagnant(m.chargerPlateauTemp())!='.'){ 
+					System.out.println("Impossible d'annuler le dernier coup, la partie est fini");
+					System.out.println("retour au menu");
+					choix=-1;
+					
+				}
 				else{
 					graphe=Plateau.annulerDernierCoup(graphe,x,y);
 					pion=m.chargerDernierPion();
