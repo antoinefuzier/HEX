@@ -1,9 +1,14 @@
-import java.util.Scanner;
+/******************************************************************
+* Menu                                                   		  *
+* Description: Module de gestion des erreurs de saisies           *
+* F. ANTOINE - Univ. de Toulouse III - Paul Sabatier              *
+*******************************************************************/
 
+import java.util.Scanner;
 
 public class GererErreur {
 
-	/*
+	/**
 	 * Description: vérifie que valeur est compris
 	 * entre le min et le max, sinon
 	 * on demande une nouvelle valeur et on la retourne.
@@ -29,7 +34,7 @@ public class GererErreur {
 		return valeur;
 	}
 	
-	/*
+	/**
 	 * Description: vérifie qu'on rentre bien un int
 	 * sinon on boucle jusqu'a ce que l'utilisateur
 	 * donne une valeur correct
@@ -60,7 +65,7 @@ public class GererErreur {
 	}
 	
 	
-	/*
+	/**
 	 * Description: vérifie qu'on rentre bien un char
 	 * sinon on boucle jusqu'a ce que l'utilisateur
 	 * donne une valeur correct, soit 'b' soit 'n'
