@@ -1,11 +1,13 @@
-/*
- * Description: Classe pour jouer une partie en entier ou non
- */
+/******************************************************************
+* Menu                                                   		  *
+* Description: Module de gestion des tours de jeu                 *
+* F. ANTOINE - Univ. de Toulouse III - Paul Sabatier              *
+*******************************************************************/
 
 
 public class Jouer {
  
-	
+	/**Variables */
 	private int nbCoupBlanc;
 	private int nbCoupNoir;
 	private int nbTour;
@@ -33,8 +35,8 @@ public class Jouer {
 		this.nbTour = nbTour;
 	}
 
-	/*
-	 * Description: vérifie si le coup qu'on joue apaprtient 
+	/**
+	 * Description: vérifie si le coup qu'on joue appartient 
 	 * au plateau et si il n'est pas deja occupé, 
 	 * renvoi true si on peut mettre la valeur
 	 * false sinon
@@ -56,7 +58,7 @@ public class Jouer {
 	}
 	
 	
-	/*
+	/**
 	 * Description: permet de rentrer un pion dans le graphe
 	 * avec les cordonnées rentrés par l'utilisateur et
 	 * retourne le graphe ou la chaine de caractere
@@ -128,23 +130,20 @@ public class Jouer {
 		
 	}
 	
-	/*
+	/**
 	 * Description: vérifie si il a un gagnant sur le plateau
 	 * et renvoi le pion du gagnant si il y en a sinon le caractere '.'
 	 * 
 	 * pré-condition: s!=null
 	 */
-	
-	
 
-
-	private char gagnant(String s){
+	public char gagnant(String s){
 		
 		return Plateau.verifierGagnant(s);
 
 	}
 	
-	/*
+	/**
 	 * Description: joue une partie en commençant avec un graphe et un 
 	 * pion qui commence le tour.
 	 * Retourne 1 si la partie termine avec un gagnant ou -1 si
@@ -197,7 +196,7 @@ public class Jouer {
 				pionGagnant=gagnant(graphe);
 				
 				if(pionGagnant=='n'){
-					System.out.println("Bravo! Le joueur BLANC à gagner en "+nbCoupNoir+ " coup!");
+					System.out.println("Bravo! Le joueur NOIR à gagner en "+nbCoupNoir+ " coup!");
 					System.out.println("La parti est fini, retour au menu...");
 					return -2;
 				}
