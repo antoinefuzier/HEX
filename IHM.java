@@ -113,6 +113,7 @@ public class IHM {
 			
 			/* Annuler dernier coup */
 			else if(choix==4){
+				graphe=m.chargerPlateauTemp();
 				int taille_test=m.recupererTaille();
 				int x=m.recuperDernierCoupX();				
 				int y=m.recuperDernierCoupY();				
@@ -132,11 +133,11 @@ public class IHM {
 					pion=m.chargerDernierPion();
 					if(pion=='b'){
 						m.nbCoup(j);
-						choix=j.jouerPartie(graphe,'n');
+						choix=j.jouerPartie(graphe,'b');
 					}
 					else{
 						m.nbCoup(j);
-						choix=j.jouerPartie(graphe,'b');
+						choix=j.jouerPartie(graphe,'n');
 					}
 				}
 			}
