@@ -1,8 +1,8 @@
 /******************************************************************
-* Menu                                                   *
-* Description: Module qui permet de représenter un plateau de jeu *
-* de taille variable                                              *
-* F. ANTOINE - Univ. de Toulouse III - Paul Sabatier               *
+* Menu                                                   		  *
+* Description: Module de gestion des fichiers textes et du        *
+* platau de jeu                                                   *
+* F. ANTOINE - Univ. de Toulouse III - Paul Sabatier              *
 *******************************************************************/
 
 
@@ -16,6 +16,11 @@ import java.io.PrintWriter;
 
 	public class Menu {
 
+		/**
+		 * Description: affiche sous forme de plateau de jeu
+		 * la chaine de carractère en entréé
+		 * 
+		 */
 		public static void afficher(String s){
 			int taille=s.length();
 			taille=(int) Math.sqrt(taille);
@@ -71,7 +76,7 @@ import java.io.PrintWriter;
 			System.out.println("\n");
 		}
 		
-		/*
+		/**
 		 * Description: affiche le menu et demande à l'utilisateur
 		 * un choix, retourne ce choix avec un int
 		 */
@@ -93,7 +98,7 @@ import java.io.PrintWriter;
 				
 		}
 		
-		/*
+		/**
 		 * 
 		 * Description: sauvegarde s dans un fichier de transition avec sa taille
 		 * 
@@ -224,7 +229,7 @@ import java.io.PrintWriter;
 		
 		
 		
-		/*
+		/**
 		 * Description: copie le fichier saugergardeTemp.txt
 		 * dans sauvegardeTemp.txt
 		 * 
@@ -248,7 +253,7 @@ import java.io.PrintWriter;
 				}
 		}
 		
-		/*
+		/**
 		 * Description: Charge le fichier temporaraire en entier et le met 
 		 * dans un string qu'on retourne
 		 */
@@ -450,11 +455,39 @@ import java.io.PrintWriter;
 			
 		}
 		
-		/*
+		/**
 		 * Description: charge le fichier sauvegarde.txt et renvoi le plateau
 		 */
 		
 		public String charger() {
+		    try {
+		        BufferedReader fr = new BufferedReader(new FileReader ("sauvegarde.txt"));
+		        fr.readLine();
+		        String s1=fr.readLine();  /*prend la ligne "\board taille */
+		        char taille=s1.charAt(s1.length()-1);
+		        String valeur = new String();
+		        int i=0;
+		        while (fr.ready() && i+'0'<taille ) {
+		        	
+		            	valeur += fr.readLine();
+		            	i++;
+		            }
+		    fr.close();
+		        return valeur;
+		        }
+		catch (IOException exception){
+		    System.out.println ("Erreur lors de la lecture : " + exception.getMessage());
+		    return "null";
+		        }
+		
+		    }
+		/**
+		 * 
+		 * Description: charge le fichier sauvegardeTemp.txt et renvoi le plateau
+		 * 
+		 */
+		
+		public String chargerPlateauTemp() {
 		    try {
 		        BufferedReader fr = new BufferedReader(new FileReader ("sauvegardeTemp.txt"));
 		        fr.readLine();
@@ -477,8 +510,13 @@ import java.io.PrintWriter;
 		
 		    }
 		
-		
-		
+		/**
+		 * 
+		 * Description: Charge le pion du dernier coup joué 
+		 * dans le fichier sauvegardeTemp.txt et le renvoi.
+		 * si il renvoi '.' aucun coup n'a été encore joué.
+		 * 
+		 */
 		public char chargerDernierPion(){
 			try {
 				/* tableau de lignes qui contient le fichier ligne par ligne */
@@ -493,8 +531,9 @@ import java.io.PrintWriter;
 		            }
 		        
 		        fr.close();
-		        
-		        if(tab[i-3].charAt(6)=='B') /* tab[i-3] contient le dernier "\play PION x y " jouer */
+		        if(tab[i-3].charAt(1)!='p')
+		        	return '.';
+		        else if(tab[i-3].charAt(6)=='B') /* tab[i-3] contient le dernier "\play PION x y " jouer */
 		        	return 'b';
 		        else if(tab[i-3].charAt(6)=='N')
 		        	return 'n';
@@ -512,9 +551,10 @@ import java.io.PrintWriter;
 		
 		    }
 		
-		/*
+		/**
 		 * Description: met à jour le nombre de coup des
 		 * joueurs blanc, noir et le nombre de tour
+		 * quand on lance des parties chargées
 		 */
 		public void nbCoup(Jouer j){
 			int i;
@@ -564,6 +604,12 @@ import java.io.PrintWriter;
 		        }
 		
 		    }
+		
+		public void initialisernbCoup(Jouer j){
+			j.setNbCoupBlanc(1);
+			j.setNbCoupNoir(1);
+			j.setNbTour(1);
+		}
 }
 		
 
