@@ -184,7 +184,6 @@ import java.io.PrintWriter;
 				{
 		        	PrintWriter fw = new PrintWriter(new BufferedWriter(new FileWriter (f)));
 		        	String nouveau=valeur.substring((13+((taille+1)*taille))+1,valeur.length());
-		        	System.out.println(nouveau);
 		        	String n="\\hex\n\\board "+ taille+ "\n";
 		        	String ajout;
 		        	for(int i=0;i<s.length();i++){ 
