@@ -1,5 +1,5 @@
 /******************************************************************
-* Menu                                                   		  *
+* GererErreur                                                  		  *
 * Description: Module de gestion des erreurs de saisies           *
 * F. ANTOINE - Univ. de Toulouse III - Paul Sabatier              *
 *******************************************************************/
