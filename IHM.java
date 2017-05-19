@@ -1,5 +1,5 @@
 /******************************************************************
-* Menu                                                   		  *
+* IHM                                                  		  *
 * Description: Module pour jouer au jeu HEX entre deux joueurs    *
 * F. ANTOINE - Univ. de Toulouse III - Paul Sabatier              *
 *******************************************************************/
