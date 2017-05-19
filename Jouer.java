@@ -1,5 +1,5 @@
 /******************************************************************
-* Menu                                                   		  *
+* Jouer                                                  		  *
 * Description: Module de gestion des tours de jeu                 *
 * F. ANTOINE - Univ. de Toulouse III - Paul Sabatier              *
 *******************************************************************/
