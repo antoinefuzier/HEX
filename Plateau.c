@@ -1,3 +1,11 @@
+/******************************************************************
+* Plateau.c                                                		  *
+* Description: Fonctions C pour java                              *
+* F. ANTOINE - Univ. de Toulouse III - Paul Sabatier              *
+*******************************************************************/
+
+
+
 #include <stdlib.h>
 #include <assert.h>
 #include <stdio.h>
@@ -15,7 +23,9 @@ Java_Plateau_creerGraphe (JNIEnv *env, jclass cl, jint ji) {
 
 
 /* traitement en C */
-char* res=graphe_toString(graphe_create(ji));
+Graphe g=graphe_create(ji);
+char* res=graphe_toString(g);
+graphe_destroy(&g);
 /* conversion du résultat en chaîne Java */
 jstring jres = (*env)->NewStringUTF(env, res);
 /* libération mémoire */
@@ -33,6 +43,7 @@ Java_Plateau_rentrerCoup (JNIEnv *env, jclass cl, jstring js,jchar jc, jint ji1,
 	Graphe g=graphe_toGraphe((char *)s);
 	g=graphe_insert(&g,jc,ji1,ji2);
 	char* res=graphe_toString(g);
+	graphe_destroy(&g);
 	/* conversion du résultat en chaîne Java */
 	jstring jres = (*env)->NewStringUTF(env, res);
 	/* libération mémoire */
@@ -50,7 +61,9 @@ Java_Plateau_verifierGagnant (JNIEnv *env, jclass cl, jstring js){
 	const char *s = (*env)->GetStringUTFChars(env, js, 0);
 	/* traitement en C */
 	Graphe g=graphe_toGraphe((char *)s);
-	return graphe_detectWinner(g);
+	char c= graphe_detectWinner(g);
+	graphe_destroy(&g);
+	return c;
 	
 
 
@@ -67,6 +80,7 @@ Java_Plateau_annulerDernierCoup (JNIEnv *env, jclass cl, jstring js, jint ji1, j
 	Graphe g=graphe_toGraphe((char *)s);
 	g=graphe_remove(&g,ji1,ji2);
 	char* res=graphe_toString(g);
+	graphe_destroy(&g);
 	/* conversion du résultat en chaîne Java */
 	jstring jres = (*env)->NewStringUTF(env, res);
 	/* libération mémoire */
@@ -85,7 +99,8 @@ Java_Plateau_verifierCase (JNIEnv *env, jclass cl, jstring js, jint ji1, jint ji
 	/* conversion de la chaîne Java en chaîne C */
 	const char *s = (*env)->GetStringUTFChars(env, js, 0);
 	Graphe g=graphe_toGraphe((char *)s);
-	return graphe_getCellContent(g,ji1,ji2);
-
+	char c= graphe_getCellContent(g,ji1,ji2);
+	graphe_destroy(&g);
+	return c;
 
   }
