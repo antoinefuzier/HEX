@@ -1,0 +1,19 @@
+\ia o n b F
+\hex
+\board 3
+*oo
+o*o
+***
+\endboard
+\game
+\play NOIR 0 0
+\play BLANC 0 1
+\play NOIR 1 1
+\play BLANC 0 2
+\play NOIR 2 2
+\play BLANC 1 0
+\play NOIR 2 0
+\play BLANC 1 2
+\play NOIR 2 1
+\endgame
+\endhex
